@@ -17,18 +17,32 @@ function animateCounter() {
             }
         };
         
-        updateCounter();
+        // Start animation when element is in viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        observer.observe(counter);
     });
 }
 
 // Countdown Timer
 function updateCountdown() {
     const now = new Date();
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
+    const targetTime = new Date(now);
+    targetTime.setHours(now.getHours() + 2, 37, 15, 0); // Set to 2 hours 37 minutes 15 seconds from now
     
-    const diff = tomorrow - now;
+    const diff = targetTime - now;
+    
+    if (diff <= 0) {
+        // Reset timer when it reaches zero
+        targetTime.setDate(targetTime.getDate() + 1);
+    }
     
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -56,31 +70,32 @@ function initScrollAnimations() {
     }, observerOptions);
     
     // Observe elements for animation
-    document.querySelectorAll('.model-card, .membership-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
+    const animatedElements = document.querySelectorAll('.model-card, .access-card, .stat-item');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
     });
 }
 
-// Preview Button Handler
-function initPreviewButtons() {
-    const previewButtons = document.querySelectorAll('.preview-btn');
-    
-    previewButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+// Load More functionality
+function initLoadMore() {
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            // Simulate loading more content
+            this.textContent = 'Loading...';
+            this.disabled = true;
             
-            // Create preview modal or redirect to actual preview
-            const modelCard = this.closest('.model-card');
-            const modelName = modelCard.querySelector('.model-name').textContent;
-            
-            // For now, just show an alert. You can replace this with actual preview functionality
-            alert(`Preview for ${modelName} would show here!`);
+            setTimeout(() => {
+                // In a real scenario, you would load more content here
+                alert('More models loaded! In a real implementation, this would load additional content.');
+                this.textContent = 'LOAD MORE MODELS';
+                this.disabled = false;
+            }, 1000);
         });
-    });
+    }
 }
 
 // Initialize everything when DOM is loaded
@@ -95,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize scroll animations
     initScrollAnimations();
     
-    // Initialize preview buttons
-    initPreviewButtons();
+    // Initialize load more functionality
+    initLoadMore();
     
     // Add smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -121,33 +136,45 @@ document.addEventListener('DOMContentLoaded', function() {
             header.style.background = 'rgba(15, 23, 42, 0.95)';
         }
     });
+    
+    // Add click tracking for analytics
+    const adLinks = document.querySelectorAll('a[href*="shorturl.at"]');
+    adLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // You can add analytics tracking here
+            console.log('Ad link clicked:', this.href);
+            
+            // Optional: Add a small delay before redirect to allow tracking
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 100);
+        });
+    });
 });
 
-// Add some interactive effects
+// Add interactive hover effects
 document.addEventListener('DOMContentLoaded', function() {
     // Add hover effects to cards
-    const cards = document.querySelectorAll('.model-card, .membership-card');
+    const cards = document.querySelectorAll('.model-card, .access-card');
     
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transform = this.classList.contains('featured') 
-                ? 'scale(1.05) translateY(-5px)' 
-                : 'translateY(-5px)';
+            this.style.transform = 'translateY(-5px)';
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = this.classList.contains('featured') 
-                ? 'scale(1.05)' 
-                : 'translateY(0)';
+            this.style.transform = 'translateY(0)';
         });
     });
     
-    // Add click tracking for analytics (optional)
-    const adLinks = document.querySelectorAll('a[href*="shorturl.at"]');
-    adLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            console.log('Ad link clicked:', this.href);
-            // You can add your analytics tracking here
-        });
+    // Add pulse animation to CTA buttons
+    const ctaButtons = document.querySelectorAll('.main-cta-btn, .final-cta-btn');
+    ctaButtons.forEach(btn => {
+        setInterval(() => {
+            btn.style.boxShadow = '0 0 20px rgba(0, 198, 171, 0.5)';
+            setTimeout(() => {
+                btn.style.boxShadow = 'none';
+            }, 500);
+        }, 3000);
     });
 });
