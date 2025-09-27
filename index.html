@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Animated Background Elements -->
+    <!-- Enhanced Animated Background -->
     <div class="floating-elements">
         <div class="floating-star"></div>
         <div class="floating-star"></div>
@@ -21,12 +21,20 @@
         <div class="floating-circle"></div>
         <div class="floating-triangle"></div>
         <div class="floating-triangle"></div>
+        <div class="floating-sparkle"></div>
+        <div class="floating-sparkle"></div>
+        <div class="floating-sparkle"></div>
     </div>
 
     <!-- Particle Background -->
     <div class="particles-container">
         <canvas id="particles-canvas"></canvas>
     </div>
+
+    <!-- Glow Effects -->
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
 
     <!-- Header -->
     <header class="header">
@@ -48,11 +56,13 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
+                <!-- Live Badge -->
                 <div class="hero-badge">
                     <span class="live-dot"></span>
                     <span class="live-text">LIVE NOW • 2,847 MEMBERS ONLINE</span>
                 </div>
                 
+                <!-- Main Title -->
                 <div class="hero-main">
                     <h1 class="hero-title">
                         <span class="title-main">FREE EXCLUSIVE CONTENT</span>
@@ -65,6 +75,7 @@
                     </p>
                 </div>
 
+                <!-- Stats -->
                 <div class="stats-container">
                     <div class="stat-item">
                         <div class="stat-number" data-count="5247">0</div>
@@ -80,26 +91,28 @@
                     </div>
                 </div>
 
+                <!-- Countdown Timer -->
                 <div class="countdown-timer">
                     <div class="timer-label">FREE ACCESS ENDS IN:</div>
                     <div class="timer-display">
                         <div class="time-unit">
                             <span class="time-value" id="hours">02</span>
-                            <span class="time-label">HOURS</span>
+                            <span class="time-label">HRS</span>
                         </div>
                         <div class="time-separator">:</div>
                         <div class="time-unit">
                             <span class="time-value" id="minutes">18</span>
-                            <span class="time-label">MINUTES</span>
+                            <span class="time-label">MIN</span>
                         </div>
                         <div class="time-separator">:</div>
                         <div class="time-unit">
                             <span class="time-value" id="seconds">52</span>
-                            <span class="time-label">SECONDS</span>
+                            <span class="time-label">SEC</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- CTA Button -->
                 <div class="cta-container">
                     <a href="https://shorturl.at/gQhzM" class="main-cta-btn">
                         <span class="btn-main">GET INSTANT FREE ACCESS</span>
@@ -126,19 +139,11 @@
                             <img src="assets/model1.jpg" alt="Sophia" class="model-image">
                             <div class="model-overlay">
                                 <span class="model-badge hot">HOT</span>
-                                <div class="model-hover">
-                                    <i class="fas fa-play"></i>
-                                    <span>View Content</span>
-                                </div>
                             </div>
                         </div>
                         <div class="model-info">
                             <h3 class="model-name">Sophia</h3>
-                            <div class="model-details">
-                                <span class="model-age">22 Years</span>
-                                <span class="model-country">USA</span>
-                            </div>
-                            <p class="model-content">250+ Exclusive Videos</p>
+                            <p class="model-details">22 • USA • 250+ Videos</p>
                         </div>
                     </a>
                 </div>
@@ -150,19 +155,11 @@
                             <img src="assets/model2.jpg" alt="Isabella" class="model-image">
                             <div class="model-overlay">
                                 <span class="model-badge new">NEW</span>
-                                <div class="model-hover">
-                                    <i class="fas fa-play"></i>
-                                    <span>View Content</span>
-                                </div>
                             </div>
                         </div>
                         <div class="model-info">
                             <h3 class="model-name">Isabella</h3>
-                            <div class="model-details">
-                                <span class="model-age">24 Years</span>
-                                <span class="model-country">Germany</span>
-                            </div>
-                            <p class="model-content">Live Shows Available</p>
+                            <p class="model-details">24 • Germany • Live Shows</p>
                         </div>
                     </a>
                 </div>
@@ -174,19 +171,11 @@
                             <img src="assets/model3.jpg" alt="Emma" class="model-image">
                             <div class="model-overlay">
                                 <span class="model-badge vip">VIP</span>
-                                <div class="model-hover">
-                                    <i class="fas fa-play"></i>
-                                    <span>View Content</span>
-                                </div>
                             </div>
                         </div>
                         <div class="model-info">
                             <h3 class="model-name">Emma</h3>
-                            <div class="model-details">
-                                <span class="model-age">21 Years</span>
-                                <span class="model-country">UK</span>
-                            </div>
-                            <p class="model-content">Exclusive Photo Sets</p>
+                            <p class="model-details">21 • UK • Exclusive Sets</p>
                         </div>
                     </a>
                 </div>
@@ -198,19 +187,11 @@
                             <img src="assets/model4.jpg" alt="Olivia" class="model-image">
                             <div class="model-overlay">
                                 <span class="model-badge exclusive">EXCLUSIVE</span>
-                                <div class="model-hover">
-                                    <i class="fas fa-play"></i>
-                                    <span>View Content</span>
-                                </div>
                             </div>
                         </div>
                         <div class="model-info">
                             <h3 class="model-name">Olivia</h3>
-                            <div class="model-details">
-                                <span class="model-age">25 Years</span>
-                                <span class="model-country">France</span>
-                            </div>
-                            <p class="model-content">Premium Content</p>
+                            <p class="model-details">25 • France • Premium</p>
                         </div>
                     </a>
                 </div>
@@ -222,19 +203,11 @@
                             <img src="assets/model5.jpg" alt="Mia" class="model-image">
                             <div class="model-overlay">
                                 <span class="model-badge trending">TRENDING</span>
-                                <div class="model-hover">
-                                    <i class="fas fa-play"></i>
-                                    <span>View Content</span>
-                                </div>
                             </div>
                         </div>
                         <div class="model-info">
                             <h3 class="model-name">Mia</h3>
-                            <div class="model-details">
-                                <span class="model-age">23 Years</span>
-                                <span class="model-country">Canada</span>
-                            </div>
-                            <p class="model-content">180+ HD Videos</p>
+                            <p class="model-details">23 • Canada • 180+ Videos</p>
                         </div>
                     </a>
                 </div>
@@ -246,29 +219,78 @@
                             <img src="assets/model6.jpg" alt="Charlotte" class="model-image">
                             <div class="model-overlay">
                                 <span class="model-badge hot">HOT</span>
-                                <div class="model-hover">
-                                    <i class="fas fa-play"></i>
-                                    <span>View Content</span>
-                                </div>
                             </div>
                         </div>
                         <div class="model-info">
                             <h3 class="model-name">Charlotte</h3>
-                            <div class="model-details">
-                                <span class="model-age">26 Years</span>
-                                <span class="model-country">Australia</span>
-                            </div>
-                            <p class="model-content">New Content Daily</p>
+                            <p class="model-details">26 • Australia • New Today</p>
                         </div>
                     </a>
                 </div>
-            </div>
 
-            <div class="load-more-container">
-                <button class="load-more-btn">
-                    <i class="fas fa-sync-alt"></i>
-                    LOAD MORE MODELS
-                </button>
+                <!-- Model 7 -->
+                <div class="model-card">
+                    <a href="https://shorturl.at/8TrcR" class="model-link">
+                        <div class="model-image-container">
+                            <img src="assets/model7.jpg" alt="Amelia" class="model-image">
+                            <div class="model-overlay">
+                                <span class="model-badge new">NEW</span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <h3 class="model-name">Amelia</h3>
+                            <p class="model-details">20 • Sweden • 300+ Media</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Model 8 -->
+                <div class="model-card">
+                    <a href="https://shorturl.at/7LrX0" class="model-link">
+                        <div class="model-image-container">
+                            <img src="assets/model8.jpg" alt="Harper" class="model-image">
+                            <div class="model-overlay">
+                                <span class="model-badge vip">VIP</span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <h3 class="model-name">Harper</h3>
+                            <p class="model-details">27 • Spain • VIP Only</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Model 9 -->
+                <div class="model-card">
+                    <a href="https://shorturl.at/gQhzM" class="model-link">
+                        <div class="model-image-container">
+                            <img src="assets/model9.jpg" alt="Evelyn" class="model-image">
+                            <div class="model-overlay">
+                                <span class="model-badge exclusive">EXCLUSIVE</span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <h3 class="model-name">Evelyn</h3>
+                            <p class="model-details">22 • Italy • Premium Content</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Model 10 -->
+                <div class="model-card">
+                    <a href="https://shorturl.at/vvDPT" class="model-link">
+                        <div class="model-image-container">
+                            <img src="assets/model10.jpg" alt="Abigail" class="model-image">
+                            <div class="model-overlay">
+                                <span class="model-badge trending">TRENDING</span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <h3 class="model-name">Abigail</h3>
+                            <p class="model-details">24 • Brazil • Live Cams</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -337,19 +359,19 @@
 
                 <div class="cta-features">
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-check"></i>
                         <span>100% Free Forever</span>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-check"></i>
                         <span>No Credit Card Needed</span>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-check"></i>
                         <span>Instant Access</span>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-check"></i>
                         <span>Mobile Friendly</span>
                     </div>
                 </div>
@@ -379,7 +401,7 @@
                         <span>Caroline<span class="vip">VIP</span></span>
                     </div>
                     <p class="footer-description">
-                        World's largest free adult entertainment platform featuring exclusive content from verified models worldwide.
+                        World's largest free adult entertainment platform
                     </p>
                 </div>
 
@@ -396,12 +418,11 @@
                     <a href="#">Terms of Service</a>
                     <a href="#">Privacy Policy</a>
                     <a href="#">18+ Warning</a>
-                    <a href="#">DMCA</a>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 CarolineVIP. All content is 100% FREE. | Strictly 18+ Only | All models are 18+ years old</p>
+                <p>&copy; 2024 CarolineVIP. All content is 100% FREE. | Strictly 18+ Only</p>
             </div>
         </div>
     </footer>
