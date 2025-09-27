@@ -3,33 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CarolineVIP - Free Exclusive Adult Content</title>
+    <title>CarolineVIP - Exclusive Premium Content</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Simple Animated Background -->
+    <!-- Animated Background -->
     <div class="floating-elements">
-        <div class="floating-star"></div>
-        <div class="floating-star"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+        <div class="floating-shape shape-5"></div>
+        <div class="floating-shape shape-6"></div>
     </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
 
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="nav-container">
+            <nav class="navbar">
                 <div class="logo">
-                    <i class="fas fa-gem"></i>
+                    <i class="fas fa-crown"></i>
                     <span>Caroline<span class="vip">VIP</span></span>
                 </div>
-                <div class="header-badge">
-                    <i class="fas fa-user-shield"></i>
-                    <span>18+ FREE ACCESS</span>
+                <div class="header-actions">
+                    <div class="online-indicator">
+                        <span class="dot"></span>
+                        <span>2.8k Online</span>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </div>
     </header>
 
@@ -37,224 +44,276 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <!-- Live Badge -->
                 <div class="hero-badge">
-                    <span class="live-dot"></span>
-                    <span class="live-text">LIVE NOW • 2,847 MEMBERS ONLINE</span>
+                    <span class="badge-text">Exclusive Access</span>
                 </div>
                 
-                <!-- Main Title -->
-                <div class="hero-main">
-                    <h1 class="hero-title">
-                        <span class="title-main">EXCLUSIVE ADULT CONTENT</span>
-                        <span class="title-sub">100% Free Access - No Credit Card Required</span>
-                    </h1>
-                    
-                    <div class="hero-description">
-                        <p>🔥 <strong>HOT MODELS WAITING FOR YOU!</strong> Click any model below to see their private content. Real uncensored videos and photos - everything FREE!</p>
-                        <p>🚨 <strong>URGENT:</strong> This free access won't last forever. Join now before it's too late!</p>
+                <h1 class="hero-title">
+                    <span class="title-line">Premium Adult</span>
+                    <span class="title-line highlight">Content Collection</span>
+                </h1>
+                
+                <p class="hero-description">
+                    Discover exclusive content from verified models worldwide. 
+                    High-quality videos and photos available instantly.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5k+</div>
+                        <div class="stat-label">Videos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Models</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Access</div>
                     </div>
                 </div>
 
-                <!-- Direct CTA Button -->
-                <div class="cta-container">
-                    <a href="https://shorturl.at/gQhzM" class="main-cta-btn">
-                        <span class="btn-main">👉 CLICK HERE FOR FREE ACCESS 👈</span>
-                        <span class="btn-sub">Instant Access - No Registration</span>
+                <div class="hero-cta">
+                    <a href="https://shorturl.at/gQhzM" class="cta-button primary">
+                        <span class="button-text">View All Content</span>
+                        <span class="button-subtext">Free Instant Access</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Models Section -->
-    <section class="models-section">
+    <!-- Models Gallery Section -->
+    <section class="gallery-section">
         <div class="container">
+            <div class="section-header">
+                <h2>Featured Models</h2>
+                <p>Select any model to explore their exclusive content collection</p>
+            </div>
+
             <div class="models-grid">
                 <!-- Model 1 -->
                 <div class="model-card">
-                    <a href="https://shorturl.at/gQhzM" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model1.jpg" alt="Sophia" class="model-image">
+                    <div class="card-image">
+                        <img src="assets/model1.jpg" alt="Sophia" class="model-image">
+                        <div class="image-overlay">
+                            <div class="model-badge premium">Premium</div>
+                            <button class="view-button">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="model-name">Sophia</h3>
                         <div class="model-info">
-                            <h3 class="model-name">Sophia</h3>
-                            <p class="model-details">22 • USA • 250+ Videos</p>
-                            <span class="model-badge">HOT</span>
+                            <span class="model-age">22 Years</span>
+                            <span class="model-country">USA</span>
                         </div>
-                    </a>
+                        <p class="model-stats">250+ Videos • 500+ Photos</p>
+                        <a href="https://shorturl.at/gQhzM" class="content-link">
+                            View Full Collection
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Model 2 -->
                 <div class="model-card">
-                    <a href="https://shorturl.at/vvDPT" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model2.jpg" alt="Isabella" class="model-image">
+                    <div class="card-image">
+                        <img src="assets/model2.jpg" alt="Isabella" class="model-image">
+                        <div class="image-overlay">
+                            <div class="model-badge new">New</div>
+                            <button class="view-button">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="model-name">Isabella</h3>
                         <div class="model-info">
-                            <h3 class="model-name">Isabella</h3>
-                            <p class="model-details">24 • Germany • Live Shows</p>
-                            <span class="model-badge">NEW</span>
+                            <span class="model-age">24 Years</span>
+                            <span class="model-country">Germany</span>
                         </div>
-                    </a>
+                        <p class="model-stats">Live Shows • Exclusive Sets</p>
+                        <a href="https://shorturl.at/vvDPT" class="content-link">
+                            View Full Collection
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Model 3 -->
                 <div class="model-card">
-                    <a href="https://shorturl.at/8TrcR" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model3.jpg" alt="Emma" class="model-image">
+                    <div class="card-image">
+                        <img src="assets/model3.jpg" alt="Emma" class="model-image">
+                        <div class="image-overlay">
+                            <div class="model-badge vip">VIP</div>
+                            <button class="view-button">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="model-name">Emma</h3>
                         <div class="model-info">
-                            <h3 class="model-name">Emma</h3>
-                            <p class="model-details">21 • UK • Exclusive Sets</p>
-                            <span class="model-badge">VIP</span>
+                            <span class="model-age">21 Years</span>
+                            <span class="model-country">UK</span>
                         </div>
-                    </a>
+                        <p class="model-stats">Exclusive Content • HD Quality</p>
+                        <a href="https://shorturl.at/8TrcR" class="content-link">
+                            View Full Collection
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Model 4 -->
                 <div class="model-card">
-                    <a href="https://shorturl.at/7LrX0" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model4.jpg" alt="Olivia" class="model-image">
+                    <div class="card-image">
+                        <img src="assets/model4.jpg" alt="Olivia" class="model-image">
+                        <div class="image-overlay">
+                            <div class="model-badge exclusive">Exclusive</div>
+                            <button class="view-button">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="model-name">Olivia</h3>
                         <div class="model-info">
-                            <h3 class="model-name">Olivia</h3>
-                            <p class="model-details">25 • France • Premium</p>
-                            <span class="model-badge">EXCLUSIVE</span>
+                            <span class="model-age">25 Years</span>
+                            <span class="model-country">France</span>
                         </div>
-                    </a>
+                        <p class="model-stats">Premium Sets • 4K Videos</p>
+                        <a href="https://shorturl.at/7LrX0" class="content-link">
+                            View Full Collection
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Model 5 -->
                 <div class="model-card">
-                    <a href="https://shorturl.at/gQhzM" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model5.jpg" alt="Mia" class="model-image">
+                    <div class="card-image">
+                        <img src="assets/model5.jpg" alt="Mia" class="model-image">
+                        <div class="image-overlay">
+                            <div class="model-badge trending">Trending</div>
+                            <button class="view-button">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="model-name">Mia</h3>
                         <div class="model-info">
-                            <h3 class="model-name">Mia</h3>
-                            <p class="model-details">23 • Canada • 180+ Videos</p>
-                            <span class="model-badge">TRENDING</span>
+                            <span class="model-age">23 Years</span>
+                            <span class="model-country">Canada</span>
                         </div>
-                    </a>
+                        <p class="model-stats">180+ Videos • New Content</p>
+                        <a href="https://shorturl.at/gQhzM" class="content-link">
+                            View Full Collection
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Model 6 -->
                 <div class="model-card">
-                    <a href="https://shorturl.at/vvDPT" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model6.jpg" alt="Charlotte" class="model-image">
+                    <div class="card-image">
+                        <img src="assets/model6.jpg" alt="Charlotte" class="model-image">
+                        <div class="image-overlay">
+                            <div class="model-badge hot">Hot</div>
+                            <button class="view-button">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="model-name">Charlotte</h3>
                         <div class="model-info">
-                            <h3 class="model-name">Charlotte</h3>
-                            <p class="model-details">26 • Australia • New Today</p>
-                            <span class="model-badge">HOT</span>
+                            <span class="model-age">26 Years</span>
+                            <span class="model-country">Australia</span>
                         </div>
-                    </a>
-                </div>
-
-                <!-- Model 7 -->
-                <div class="model-card">
-                    <a href="https://shorturl.at/8TrcR" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model7.jpg" alt="Amelia" class="model-image">
-                        </div>
-                        <div class="model-info">
-                            <h3 class="model-name">Amelia</h3>
-                            <p class="model-details">20 • Sweden • 300+ Media</p>
-                            <span class="model-badge">NEW</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Model 8 -->
-                <div class="model-card">
-                    <a href="https://shorturl.at/7LrX0" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model8.jpg" alt="Harper" class="model-image">
-                        </div>
-                        <div class="model-info">
-                            <h3 class="model-name">Harper</h3>
-                            <p class="model-details">27 • Spain • VIP Only</p>
-                            <span class="model-badge">VIP</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Model 9 -->
-                <div class="model-card">
-                    <a href="https://shorturl.at/gQhzM" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model9.jpg" alt="Evelyn" class="model-image">
-                        </div>
-                        <div class="model-info">
-                            <h3 class="model-name">Evelyn</h3>
-                            <p class="model-details">22 • Italy • Premium Content</p>
-                            <span class="model-badge">EXCLUSIVE</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Model 10 -->
-                <div class="model-card">
-                    <a href="https://shorturl.at/vvDPT" class="model-link">
-                        <div class="model-image-container">
-                            <img src="assets/model10.jpg" alt="Abigail" class="model-image">
-                        </div>
-                        <div class="model-info">
-                            <h3 class="model-name">Abigail</h3>
-                            <p class="model-details">24 • Brazil • Live Cams</p>
-                            <span class="model-badge">TRENDING</span>
-                        </div>
-                    </a>
+                        <p class="model-stats">Daily Updates • Live Sessions</p>
+                        <a href="https://shorturl.at/vvDPT" class="content-link">
+                            View Full Collection
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ultra Compact Quick Access Section -->
-    <section class="quick-access">
+    <!-- Quick Access Section -->
+    <section class="quick-access-section">
         <div class="container">
+            <div class="section-header">
+                <h2>Quick Access</h2>
+                <p>Instant entry to different content categories</p>
+            </div>
+
             <div class="access-grid">
                 <a href="https://shorturl.at/gQhzM" class="access-card">
-                    <i class="fas fa-video"></i>
-                    <span>HD Videos</span>
+                    <div class="access-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="access-content">
+                        <h3>Video Collection</h3>
+                        <p>HD Quality Videos</p>
+                    </div>
+                    <div class="access-badge">Free</div>
                 </a>
 
                 <a href="https://shorturl.at/vvDPT" class="access-card">
-                    <i class="fas fa-photo-video"></i>
-                    <span>Photo Sets</span>
+                    <div class="access-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="access-content">
+                        <h3>Photo Gallery</h3>
+                        <p>Exclusive Photo Sets</p>
+                    </div>
+                    <div class="access-badge">Free</div>
                 </a>
 
                 <a href="https://shorturl.at/8TrcR" class="access-card">
-                    <i class="fas fa-broadcast-tower"></i>
-                    <span>Live Shows</span>
+                    <div class="access-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <div class="access-content">
+                        <h3>Live Shows</h3>
+                        <p>Real-time Performances</p>
+                    </div>
+                    <div class="access-badge">Free</div>
                 </a>
 
                 <a href="https://shorturl.at/7LrX0" class="access-card">
-                    <i class="fas fa-crown"></i>
-                    <span>VIP Content</span>
+                    <div class="access-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="access-content">
+                        <h3>VIP Content</h3>
+                        <p>Members Only Access</p>
+                    </div>
+                    <div class="access-badge">Free</div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Final CTA Section -->
-    <section class="final-cta">
+    <!-- CTA Section -->
+    <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <div class="cta-action">
-                    <a href="https://shorturl.at/gQhzM" class="final-cta-btn">
-                        <span class="btn-main">🚨 CLICK HERE FOR INSTANT FREE ACCESS 🚨</span>
-                        <span class="btn-sub">Don't Miss Out - Limited Time Offer</span>
-                    </a>
+                <div class="cta-text">
+                    <h2>Ready to Explore?</h2>
+                    <p>Join thousands of satisfied members enjoying exclusive content daily</p>
                 </div>
-
-                <div class="security-notice">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>18+ Only • 100% Private • Secure Connection</span>
+                <div class="cta-actions">
+                    <a href="https://shorturl.at/gQhzM" class="cta-button large">
+                        <span class="button-text">Get Instant Access</span>
+                        <span class="button-subtext">No Registration Required</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -263,8 +322,35 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-crown"></i>
+                        <span>CarolineVIP</span>
+                    </div>
+                    <p class="footer-description">
+                        Premium adult entertainment platform featuring exclusive content from verified models worldwide.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="https://shorturl.at/gQhzM">Video Library</a>
+                    <a href="https://shorturl.at/vvDPT">Live Shows</a>
+                    <a href="https://shorturl.at/8TrcR">Photo Gallery</a>
+                    <a href="https://shorturl.at/7LrX0">VIP Access</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">18+ Warning</a>
+                </div>
+            </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 CarolineVIP. All content is 100% FREE. | Strictly 18+ Only</p>
+                <p>&copy; 2024 CarolineVIP. All rights reserved. | 18+ Only</p>
             </div>
         </div>
     </footer>
