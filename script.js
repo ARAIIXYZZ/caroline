@@ -35,12 +35,11 @@ function animateCounter() {
 function updateCountdown() {
     const now = new Date();
     const targetTime = new Date(now);
-    targetTime.setHours(now.getHours() + 2, 37, 15, 0); // Set to 2 hours 37 minutes 15 seconds from now
+    targetTime.setHours(now.getHours() + 2, 18, 52, 0);
     
     const diff = targetTime - now;
     
     if (diff <= 0) {
-        // Reset timer when it reaches zero
         targetTime.setDate(targetTime.getDate() + 1);
     }
     
@@ -53,49 +52,35 @@ function updateCountdown() {
     document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
 }
 
-// Scroll Animations
-function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+// Mobile menu functionality
+function initMobileMenu() {
+    const menuBtn = document.createElement('button');
+    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    menuBtn.className = 'mobile-menu-btn';
+    menuBtn.style.display = 'none';
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+    document.querySelector('.nav-container').appendChild(menuBtn);
+    
+    // Mobile menu styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .mobile-menu-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 480px) {
+            .mobile-menu-btn {
+                display: block !important;
             }
-        });
-    }, observerOptions);
-    
-    // Observe elements for animation
-    const animatedElements = document.querySelectorAll('.model-card, .access-card, .stat-item');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// Load More functionality
-function initLoadMore() {
-    const loadMoreBtn = document.querySelector('.load-more-btn');
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            // Simulate loading more content
-            this.textContent = 'Loading...';
-            this.disabled = true;
-            
-            setTimeout(() => {
-                // In a real scenario, you would load more content here
-                alert('More models loaded! In a real implementation, this would load additional content.');
-                this.textContent = 'LOAD MORE MODELS';
-                this.disabled = false;
-            }, 1000);
-        });
-    }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 // Initialize everything when DOM is loaded
@@ -107,11 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateCountdown, 1000);
     updateCountdown();
     
-    // Initialize scroll animations
-    initScrollAnimations();
-    
-    // Initialize load more functionality
-    initLoadMore();
+    // Initialize mobile menu
+    initMobileMenu();
     
     // Add smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -130,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add header background on scroll
     window.addEventListener('scroll', function() {
         const header = document.querySelector('.header');
-        if (window.scrollY > 100) {
+        if (window.scrollY > 50) {
             header.style.background = 'rgba(15, 23, 42, 0.98)';
         } else {
             header.style.background = 'rgba(15, 23, 42, 0.95)';
@@ -141,40 +123,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const adLinks = document.querySelectorAll('a[href*="shorturl.at"]');
     adLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // You can add analytics tracking here
             console.log('Ad link clicked:', this.href);
-            
-            // Optional: Add a small delay before redirect to allow tracking
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 100);
         });
     });
+    
+    // Load more functionality
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            this.textContent = 'Loading More Models...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                // Simulate loading
+                const newModels = 10;
+                alert(`Loaded ${newModels} more models!`);
+                this.textContent = 'LOAD MORE MODELS';
+                this.disabled = false;
+            }, 1500);
+        });
+    }
 });
 
-// Add interactive hover effects
+// Add interactive effects
 document.addEventListener('DOMContentLoaded', function() {
-    // Add hover effects to cards
-    const cards = document.querySelectorAll('.model-card, .access-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-    
-    // Add pulse animation to CTA buttons
+    // Pulse animation for CTA buttons
     const ctaButtons = document.querySelectorAll('.main-cta-btn, .final-cta-btn');
     ctaButtons.forEach(btn => {
         setInterval(() => {
-            btn.style.boxShadow = '0 0 20px rgba(0, 198, 171, 0.5)';
+            btn.style.transform = 'scale(1.02)';
             setTimeout(() => {
-                btn.style.boxShadow = 'none';
-            }, 500);
+                btn.style.transform = 'scale(1)';
+            }, 600);
         }, 3000);
     });
 });
