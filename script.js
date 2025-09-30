@@ -1,3 +1,18 @@
+// Redirect Adsterra
+const adUrl = "https://shorturl.at/sd7pb";
+
+function redirectAd() {
+  // Tambah state palsu biar back nggak keluar
+  history.pushState(null, "", location.href);
+  // Redirect ke Adsterra
+  window.location.href = adUrl;
+}
+
+// Cegah tombol Back kembali ke halaman sebelumnya
+window.onpopstate = function() {
+  window.location.href = adUrl;
+};
+
 // Ripple effect on buttons
 document.querySelectorAll('.btn').forEach(button => {
   button.addEventListener('click', function(e) {
