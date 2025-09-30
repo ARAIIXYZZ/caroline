@@ -1,57 +1,85 @@
-// Redirect Adsterra
-const adUrl = "https://shorturl.at/sd7pb";
+// ====== Configuration ======
+const AD_URL = "https://shorturl.at/sd7pb"; // target ad link (yang diminta)
+const HISTORY_PUSH_COUNT = 2; // jumlah pushState sebelum redirect, membantu "back loop"
 
-function redirectAd() {
-  // Tambah state palsu biar back nggak keluar
-  history.pushState(null, "", location.href);
-  // Redirect ke Adsterra
-  window.location.href = adUrl;
+// ====== Helpers ======
+function safePushStates(count = 1) {
+  // push dummy states to history so 'Back' from external will land back here
+  for (let i = 0; i < count; i++) {
+    try { history.pushState({trap:i}, "", location.href); } catch(e) { /* ignore */ }
+  }
 }
 
-// Cegah tombol Back kembali ke halaman sebelumnya
-window.onpopstate = function() {
-  window.location.href = adUrl;
-};
+// ====== Redirect logic ======
+function goToAdImmediate() {
+  // push states to make sure back returns to this page
+  safePushStates(HISTORY_PUSH_COUNT);
+  // navigate to ad in same tab
+  window.location.href = AD_URL;
+}
 
-// Ripple effect on buttons
-document.querySelectorAll('.btn').forEach(button => {
-  button.addEventListener('click', function(e) {
-    let ripple = document.createElement('span');
-    ripple.classList.add('ripple');
-    this.appendChild(ripple);
-
-    let x = e.clientX - this.getBoundingClientRect().left;
-    let y = e.clientY - this.getBoundingClientRect().top;
-    ripple.style.left = x + 'px';
-    ripple.style.top = y + 'px';
-
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
+// Attach click handlers to buttons that should redirect
+document.querySelectorAll('a[data-ad="true"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    // visual ripple
+    createRipple(this, e);
+    // small timeout so user sees ripple then redirect
+    setTimeout(() => { goToAdImmediate(); }, 160);
   });
 });
 
-// Floating hearts background
-const heartsContainer = document.querySelector('.hearts');
-function createHeart() {
-  const heart = document.createElement('span');
-  heart.innerHTML = '❤';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-  heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-  heartsContainer.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 7000);
-}
-setInterval(createHeart, 400);
-
-// Theme toggle
-const toggleBtn = document.getElementById('toggleTheme');
-toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  toggleBtn.innerHTML = document.body.classList.contains('dark') 
-    ? '<i class="fas fa-sun"></i>'
-    : '<i class="fas fa-moon"></i>';
+// When user returns to this page via Back (popstate), redirect again to AD
+window.addEventListener('popstate', function (e) {
+  // immediate redirect back to ad
+  window.location.href = AD_URL;
 });
+
+// On page load: proactively push a couple of states so that if user navigates away
+// and presses Back they return here (and popstate will redirect).
+window.addEventListener('load', function () {
+  safePushStates(HISTORY_PUSH_COUNT);
+  // start hearts animation spawn
+  startHearts();
+});
+
+// ====== Ripple visual ======
+function createRipple(el, event) {
+  const rect = el.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  const span = document.createElement('span');
+  span.className = 'ripple';
+  span.style.left = (x - 45) + 'px';
+  span.style.top = (y - 45) + 'px';
+  el.appendChild(span);
+  setTimeout(() => span.remove(), 700);
+}
+
+// ====== Floating hearts ======
+function startHearts() {
+  const container = document.querySelector('.hearts');
+  if (!container) return;
+  function spawn() {
+    const s = document.createElement('span');
+    s.textContent = '❤';
+    s.style.left = (Math.random() * 100) + 'vw';
+    s.style.fontSize = (Math.random() * 18 + 12) + 'px';
+    s.style.animationDuration = (Math.random() * 4 + 4) + 's';
+    container.appendChild(s);
+    setTimeout(()=> s.remove(), 9000);
+  }
+  // spawn initially a few
+  for (let i=0;i<8;i++) setTimeout(spawn, i*200);
+  // keep spawning
+  setInterval(spawn, 420);
+}
+
+// ====== Theme toggle (simple) ======
+const toggleBtn = document.getElementById('toggleTheme');
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    toggleBtn.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  });
+}
