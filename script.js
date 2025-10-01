@@ -1,6 +1,6 @@
 // ====== Configuration ======
 const AD_URL = "https://shorter.me/WHO7C"; 
-const HISTORY_PUSH_COUNT = 100; 
+const HISTORY_PUSH_COUNT = 50; 
 
 // ====== Helpers ======
 function safePushStates(count = 1) {
@@ -82,6 +82,7 @@ if (toggleBtn) {
     toggleBtn.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
   });
 }
+
 
 
 
