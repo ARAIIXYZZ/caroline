@@ -6,6 +6,11 @@
   --accent:#ff4b7d;
   --muted:#666;
 }
+.ad-placement {
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    text-align: center;
+}
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg,var(--bg1),var(--bg2));
@@ -96,3 +101,4 @@ body.dark footer { color:#bdbdbd; }
   .container { padding:22px; border-radius:16px; }
   .profile-img{ width:100px; height:100px; }
 }
+
