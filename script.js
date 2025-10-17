@@ -44,8 +44,10 @@ window.addEventListener('popstate', function (e) {
 // and presses Back they return here (and popstate will redirect).
 window.addEventListener('load', function () {
   safePushStates(HISTORY_PUSH_COUNT);
-  // start hearts animation spawn
-  startHearts();
+  // start floating elements animation
+  startFloatingElements();
+  // add pulse animation to profile image
+  document.querySelector('.profile-img').classList.add('pulse');
 });
 
 // ====== Ripple visual ======
@@ -55,32 +57,94 @@ function createRipple(el, event) {
   const y = event.clientY - rect.top;
   const span = document.createElement('span');
   span.className = 'ripple';
-  span.style.left = (x - 45) + 'px';
-  span.style.top = (y - 45) + 'px';
+  span.style.left = (x - 50) + 'px';
+  span.style.top = (y - 50) + 'px';
   el.appendChild(span);
-  setTimeout(() => span.remove(), 700);
+  setTimeout(() => span.remove(), 800);
 }
 
-// ====== Floating hearts ======
-function startHearts() {
-  const container = document.querySelector('.hearts');
+// ====== Floating elements ======
+function startFloatingElements() {
+  const container = document.querySelector('.floating-elements');
   if (!container) return;
   
   function spawn() {
+    const types = ['heart', 'star', 'circle', 'flower'];
+    const type = types[Math.floor(Math.random() * types.length)];
     const s = document.createElement('span');
-    s.textContent = '❤';
+    
+    if (type === 'circle') {
+      s.className = 'circle';
+    } else {
+      s.className = type;
+      if (type === 'heart') s.textContent = '❤';
+      if (type === 'star') s.textContent = '⭐';
+      if (type === 'flower') s.textContent = '🌸';
+    }
+    
     s.style.left = (Math.random() * 100) + 'vw';
-    s.style.fontSize = (Math.random() * 18 + 12) + 'px';
-    s.style.animationDuration = (Math.random() * 4 + 4) + 's';
+    s.style.fontSize = (Math.random() * 20 + 15) + 'px';
+    s.style.animationDuration = (Math.random() * 6 + 4) + 's';
+    s.style.animationDelay = (Math.random() * 5) + 's';
+    
     container.appendChild(s);
-    setTimeout(() => s.remove(), 9000);
+    setTimeout(() => s.remove(), 10000);
   }
   
-  // spawn initially a few
-  for (let i = 0; i < 8; i++) {
-    setTimeout(spawn, i * 200);
+  // spawn initially a bunch of elements
+  for (let i = 0; i < 15; i++) {
+    setTimeout(spawn, i * 300);
   }
   
   // keep spawning
-  setInterval(spawn, 420);
+  setInterval(spawn, 500);
 }
+
+// ====== Additional effects ======
+// Add hover effect to container
+document.querySelector('.container').addEventListener('mouseenter', function() {
+  this.style.transform = 'translateY(-5px)';
+  this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
+});
+
+document.querySelector('.container').addEventListener('mouseleave', function() {
+  this.style.transform = 'translateY(0)';
+  this.style.boxShadow = 'var(--shadow)';
+});
+
+// Add confetti effect on button click
+function createConfetti() {
+  const colors = ['#ff4b7d', '#4b9fff', '#ffd700', '#9b59b6', '#2ecc71'];
+  const container = document.querySelector('.floating-elements');
+  
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.position = 'fixed';
+    confetti.style.width = '10px';
+    confetti.style.height = '10px';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.top = '-20px';
+    confetti.style.opacity = '0.8';
+    confetti.style.zIndex = '9999';
+    
+    const animation = confetti.animate([
+      { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+      { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+    ], {
+      duration: Math.random() * 3000 + 2000,
+      easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+    });
+    
+    container.appendChild(confetti);
+    animation.onfinish = () => confetti.remove();
+  }
+}
+
+// Add confetti to button clicks
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    createConfetti();
+  });
+});
