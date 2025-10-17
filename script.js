@@ -5,7 +5,11 @@ const HISTORY_PUSH_COUNT = 50;
 // ====== Helpers ======
 function safePushStates(count = 1) {
   for (let i = 0; i < count; i++) {
-    try { history.pushState({trap:i}, "", location.href); } catch(e) { /* ignore */ }
+    try { 
+      history.pushState({trap:i}, "", location.href); 
+    } catch(e) { 
+      /* ignore */ 
+    }
   }
 }
 
@@ -24,7 +28,9 @@ document.querySelectorAll('a[data-ad="true"]').forEach(a => {
     // visual ripple
     createRipple(this, e);
     // small timeout so user sees ripple then redirect
-    setTimeout(() => { goToAdImmediate(); }, 160);
+    setTimeout(() => { 
+      goToAdImmediate(); 
+    }, 160);
   });
 });
 
@@ -59,6 +65,7 @@ function createRipple(el, event) {
 function startHearts() {
   const container = document.querySelector('.hearts');
   if (!container) return;
+  
   function spawn() {
     const s = document.createElement('span');
     s.textContent = '❤';
@@ -66,23 +73,14 @@ function startHearts() {
     s.style.fontSize = (Math.random() * 18 + 12) + 'px';
     s.style.animationDuration = (Math.random() * 4 + 4) + 's';
     container.appendChild(s);
-    setTimeout(()=> s.remove(), 9000);
+    setTimeout(() => s.remove(), 9000);
   }
+  
   // spawn initially a few
-  for (let i=0;i<8;i++) setTimeout(spawn, i*200);
+  for (let i = 0; i < 8; i++) {
+    setTimeout(spawn, i * 200);
+  }
+  
   // keep spawning
   setInterval(spawn, 420);
 }
-
-// ====== Theme toggle (simple) ======
-const toggleBtn = document.getElementById('toggleTheme');
-if (toggleBtn) {
-  toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    toggleBtn.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-  });
-}
-
-
-
-
