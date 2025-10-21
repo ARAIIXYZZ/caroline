@@ -51,7 +51,7 @@ window.addEventListener('popstate', function() {
 // ====== Galaxy Background Effects ======
 function createStars() {
   const container = document.querySelector('.stars-container');
-  const starCount = 200;
+  const starCount = 150;
 
   for (let i = 0; i < starCount; i++) {
     const star = document.createElement('div');
@@ -63,7 +63,7 @@ function createStars() {
     star.style.left = Math.random() * 100 + 'vw';
     star.style.top = Math.random() * 100 + 'vh';
     star.style.animationDelay = Math.random() * 4 + 's';
-    star.style.opacity = Math.random() * 0.8 + 0.2;
+    star.style.opacity = Math.random() * 0.7 + 0.3;
     
     container.appendChild(star);
   }
@@ -88,12 +88,12 @@ function createShootingStars() {
   }
 
   // Create initial shooting stars
-  for (let i = 0; i < 5; i++) {
-    setTimeout(createShootingStar, i * 1000);
+  for (let i = 0; i < 3; i++) {
+    setTimeout(createShootingStar, i * 1500);
   }
 
   // Continuous creation
-  setInterval(createShootingStar, 2000);
+  setInterval(createShootingStar, 3000);
 }
 
 function createCosmicRays() {
@@ -114,12 +114,12 @@ function createCosmicRays() {
   }
 
   // Create initial rays
-  for (let i = 0; i < 8; i++) {
-    setTimeout(createRay, i * 800);
+  for (let i = 0; i < 6; i++) {
+    setTimeout(createRay, i * 1000);
   }
 
   // Continuous creation
-  setInterval(createRay, 3000);
+  setInterval(createRay, 4000);
 }
 
 // ====== Ripple Effect ======
@@ -143,12 +143,12 @@ function createStarburst(button) {
   const centerX = rect.left + rect.width / 2;
   const centerY = rect.top + rect.height / 2;
   
-  const colors = ['#ff4b7d', '#4fd1c5', '#6d44b8', '#25D366', '#0088cc'];
+  const colors = ['#ff6b9d', '#ff4b7d', '#c74bd7', '#d8a8ff', '#ff9ec0'];
   
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 10; i++) {
     const particle = document.createElement('div');
-    const angle = (i * 30) * Math.PI / 180;
-    const distance = 80;
+    const angle = (i * 36) * Math.PI / 180;
+    const distance = 60;
     
     particle.style.position = 'fixed';
     particle.style.width = '4px';
@@ -159,12 +159,9 @@ function createStarburst(button) {
     particle.style.top = centerY + 'px';
     particle.style.zIndex = '100';
     particle.style.pointerEvents = 'none';
-    particle.style.boxShadow = `0 0 10px ${colors[i % colors.length]}`;
+    particle.style.boxShadow = `0 0 8px ${colors[i % colors.length]}`;
     
     document.body.appendChild(particle);
-    
-    const endX = centerX + Math.cos(angle) * distance;
-    const endY = centerY + Math.sin(angle) * distance;
     
     const animation = particle.animate([
       { 
@@ -176,7 +173,7 @@ function createStarburst(button) {
         opacity: 0 
       }
     ], {
-      duration: 800,
+      duration: 600,
       easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
     });
     
@@ -186,7 +183,7 @@ function createStarburst(button) {
 
 // ====== Mouse Trail Effect ======
 document.addEventListener('mousemove', function(e) {
-  if (Math.random() > 0.7) {
+  if (Math.random() > 0.8) {
     createSpaceDust(e.clientX, e.clientY);
   }
 });
@@ -196,13 +193,13 @@ function createSpaceDust(x, y) {
   dust.style.position = 'fixed';
   dust.style.width = '2px';
   dust.style.height = '2px';
-  dust.style.backgroundColor = '#4fd1c5';
+  dust.style.backgroundColor = '#ff9ec0';
   dust.style.borderRadius = '50%';
   dust.style.left = x + 'px';
   dust.style.top = y + 'px';
   dust.style.zIndex = '5';
   dust.style.pointerEvents = 'none';
-  dust.style.boxShadow = '0 0 8px #4fd1c5';
+  dust.style.boxShadow = '0 0 6px #ff9ec0';
   
   document.body.appendChild(dust);
   
@@ -210,7 +207,7 @@ function createSpaceDust(x, y) {
     { transform: 'scale(1)', opacity: 1 },
     { transform: 'scale(0)', opacity: 0 }
   ], {
-    duration: 1000,
+    duration: 800,
     easing: 'ease-out'
   });
   
@@ -219,10 +216,10 @@ function createSpaceDust(x, y) {
 
 // ====== Auto Cosmic Events ======
 setInterval(() => {
-  if (Math.random() > 0.8) {
+  if (Math.random() > 0.7) {
     createNebulaFlash();
   }
-}, 5000);
+}, 6000);
 
 function createNebulaFlash() {
   const flash = document.createElement('div');
@@ -231,7 +228,7 @@ function createNebulaFlash() {
   flash.style.left = '0';
   flash.style.width = '100%';
   flash.style.height = '100%';
-  flash.style.background = 'radial-gradient(circle, rgba(106, 13, 173, 0.3) 0%, transparent 70%)';
+  flash.style.background = 'radial-gradient(circle, rgba(255, 107, 157, 0.2) 0%, transparent 70%)';
   flash.style.pointerEvents = 'none';
   flash.style.zIndex = '2';
   flash.style.opacity = '0';
@@ -240,10 +237,10 @@ function createNebulaFlash() {
   
   const animation = flash.animate([
     { opacity: 0 },
-    { opacity: 0.6 },
+    { opacity: 0.4 },
     { opacity: 0 }
   ], {
-    duration: 2000,
+    duration: 1500,
     easing: 'ease-in-out'
   });
   
