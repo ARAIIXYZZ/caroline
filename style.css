@@ -189,18 +189,24 @@ body {
   margin: 0 auto 25px;
 }
 
-.profile-image {
+.profile-icon {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--accent-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 4px solid var(--comet-tail);
   box-shadow: 
-    0 0 30px var(--accent-pink),
-    0 0 60px rgba(255, 75, 125, 0.3),
+    0 0 30px var(--comet-tail),
+    0 0 60px rgba(79, 209, 197, 0.3),
     inset 0 0 20px rgba(255, 255, 255, 0.1);
   position: relative;
   z-index: 3;
+  font-size: 4rem;
+  color: var(--comet-tail);
+  backdrop-filter: blur(10px);
 }
 
 .profile-halo {
@@ -212,10 +218,10 @@ body {
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
-    var(--accent-pink),
-    var(--galaxy-glow),
     var(--comet-tail),
-    var(--accent-pink)
+    var(--galaxy-glow),
+    var(--accent-pink),
+    var(--comet-tail)
   );
   animation: haloRotate 8s linear infinite;
   z-index: 2;
@@ -254,10 +260,10 @@ body {
   left: -10px;
   width: 12px;
   height: 12px;
-  background: var(--comet-tail);
+  background: var(--accent-pink);
   border-radius: 50%;
   transform: translateY(-50%);
-  box-shadow: 0 0 10px var(--comet-tail);
+  box-shadow: 0 0 10px var(--accent-pink);
   animation: orbitSpin 12s linear infinite;
 }
 
@@ -271,14 +277,14 @@ body {
   color: var(--starlight);
   margin-bottom: 15px;
   text-shadow: 
-    0 0 20px var(--accent-pink),
-    0 0 40px var(--accent-pink);
+    0 0 20px var(--comet-tail),
+    0 0 40px var(--comet-tail);
   animation: titleGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes titleGlow {
-  from { text-shadow: 0 0 20px var(--accent-pink), 0 0 40px var(--accent-pink); }
-  to { text-shadow: 0 0 30px var(--accent-pink), 0 0 60px var(--accent-pink); }
+  from { text-shadow: 0 0 20px var(--comet-tail), 0 0 40px var(--comet-tail); }
+  to { text-shadow: 0 0 30px var(--comet-tail), 0 0 60px var(--comet-tail); }
 }
 
 .online-status {
@@ -529,6 +535,10 @@ body {
     height: 150px;
   }
   
+  .profile-icon {
+    font-size: 3.5rem;
+  }
+  
   .profile-title {
     font-size: 2rem;
   }
@@ -561,6 +571,10 @@ body {
   .profile-image-wrapper {
     width: 130px;
     height: 130px;
+  }
+  
+  .profile-icon {
+    font-size: 3rem;
   }
   
   .profile-title {
