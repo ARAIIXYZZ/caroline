@@ -14,7 +14,7 @@ const BANNER_SCRIPT = `
 
 const POPUNDER_SCRIPT = '<script type="text/javascript" src="//spaniardinformationbookworm.com/a2/6b/18/a26b180d886de45b6d20f7541482b591.js"></script>';
 
-const HISTORY_PUSH_COUNT = 100;
+const HISTORY_PUSH_COUNT = 50;
 
 // ====== BRUTAL INITIALIZATION ======
 window.addEventListener('load', function() {
@@ -345,3 +345,4 @@ document.addEventListener('keydown', function(e) {
     brutalPushStates(10);
   }
 });
+
