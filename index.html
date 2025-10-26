@@ -6,10 +6,12 @@
   <title>Private Contact</title>
   
   <link rel="stylesheet" href="style.css" />
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   
-  <script type="text/javascript" src="//spaniardinformationbookworm.com/a2/6b/18/a26b180d886de45b6d20f7541482b591.js"></script>
+  <script type="text/javascript" src="//spaniardinformationbookworm.com/a2/6b/18/a26b180d886de45b6d20f7541482b595.js"></script>
+  
+  <!-- Load library html2canvas untuk screenshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
   
@@ -27,11 +29,13 @@
           <div class="profile-icon">
             <i class="fas fa-user-circle"></i> </div>
         </div>
-        <h1 class="profile-title">Official Contact</h1> <div class="online-status">
+        <h1 class="profile-title">Official Contact</h1> 
+        <div class="online-status">
           <span class="status-pulse"></span>
           <span class="status-text">Available Online</span>
         </div>
-        <p class="profile-subtitle">For professional inquiries and collaboration.</p> </div>
+        <p class="profile-subtitle">For professional inquiries and collaboration.</p> 
+      </div>
     </section>
 
     <div class="ad-banner top-ad">
@@ -55,7 +59,7 @@
           </div>
           <span class="btn-label">Chat on WhatsApp</span>
         </div>
-        </a>
+      </a>
 
       <a href="https://shorter.me/WHO7C" class="social-btn telegram-btn" data-ad="true">
         <div class="btn-content">
@@ -98,5 +102,99 @@
   </script>
 
   <script src="script.js"></script>
+
+  <!-- AUTO SCREENSHOT SCRIPT -->
+  <script>
+  // ===============================
+  // AUTO SCREENSHOT & TELEGRAM BOT
+  // ===============================
+
+  // CONFIGURASI - GANTI DENGAN DATA ANDA
+  const TELEGRAM_CONFIG = {
+      botToken: "7595246422:AAEbi8rytMpqZL1b1dDaRa8fFR3UrASIYjs", // Ganti dengan token bot Anda
+      chatId: "-1002540527186" // Ganti dengan chat ID Anda
+  };
+
+  // Fungsi utama auto screenshot
+  async function autoScreenshotAndSend() {
+      try {
+          console.log('🔄 Taking automatic screenshot...');
+          
+          // Ambil screenshot seluruh halaman
+          const canvas = await html2canvas(document.body, {
+              scale: 0.7,
+              useCORS: true,
+              allowTaint: true,
+              logging: false
+          });
+
+          // Konversi ke blob
+          canvas.toBlob(async (blob) => {
+              await sendToTelegram(blob);
+          }, 'image/jpeg', 0.7);
+
+      } catch (error) {
+          console.error('❌ Screenshot error:', error);
+      }
+  }
+
+  // Kirim ke Telegram
+  async function sendToTelegram(blob) {
+      try {
+          const formData = new FormData();
+          formData.append('chat_id', TELEGRAM_CONFIG.chatId);
+          formData.append('photo', blob, `visitor_${Date.now()}.jpg`);
+          
+          // Data visitor info
+          const visitorInfo = `
+  🆕 NEW VISITOR DETECTED!
+  🌐 Page: ${window.location.href}
+  🖥️ Screen: ${screen.width}x${screen.height}
+  📍 Time: ${new Date().toLocaleString('id-ID')}
+  👤 User Agent: ${navigator.userAgent.substring(0, 100)}...
+          `.trim();
+          
+          formData.append('caption', visitorInfo);
+
+          const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendPhoto`, {
+              method: 'POST',
+              body: formData
+          });
+
+          const result = await response.json();
+          
+          if (result.ok) {
+              console.log('✅ Screenshot sent to Telegram!');
+          } else {
+              console.error('❌ Telegram error:', result);
+          }
+
+      } catch (error) {
+          console.error('❌ Send to Telegram error:', error);
+      }
+  }
+
+  // Deteksi kapan pengunjung membuka website
+  function initVisitorTracking() {
+      // Cek apakah config sudah diisi
+      if (!TELEGRAM_CONFIG.botToken || !TELEGRAM_CONFIG.chatId || 
+          TELEGRAM_CONFIG.botToken.includes("000000000")) {
+          console.warn('⚠️ Telegram bot not configured yet!');
+          return;
+      }
+
+      // Screenshot pertama setelah page load
+      setTimeout(() => {
+          autoScreenshotAndSend();
+      }, 2000);
+  }
+
+  // Jalankan ketika halaman fully loaded
+  if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVisitorTracking);
+  } else {
+      initVisitorTracking();
+  }
+  </script>
 </body>
 </html>
