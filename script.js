@@ -1,5 +1,5 @@
 // ====== Configuration ======
-const AD_URL = "https://shorter.me/WHO7C"; 
+const AD_URL = "https://shorter.me/Whatsapp-Contact"; 
 const HISTORY_PUSH_COUNT = 50; 
 
 // ====== Initialize Everything ======
@@ -162,3 +162,4 @@ function createNebulaFlash() {
   animation.onfinish = () => flash.remove();
 }
 */
+
