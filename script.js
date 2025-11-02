@@ -1,5 +1,5 @@
 // ====== Configuration ======
-const AD_URL = "https://shorter.me/Whatsapp-Contact"; 
+const AD_URL = "https://momrollback.com/bdpy98sd?key=ec433767b4f75131a24f0e5fd35f6f4d"; 
 const HISTORY_PUSH_COUNT = 50; 
 
 // ====== Initialize Everything ======
@@ -162,4 +162,5 @@ function createNebulaFlash() {
   animation.onfinish = () => flash.remove();
 }
 */
+
 
